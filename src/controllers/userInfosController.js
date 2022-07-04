@@ -11,9 +11,10 @@ export async function getCashFlow(req,res){
 
     const userPosts=await db.collection('posts').find({ userId: new objectId(session.userId) }).toArray()
     console.log(userPosts)
-    const total = await db.collection('total').findOne({name:'total'});
-    console.log(total)
-    return res.send({userPosts, total})
+    // const total = await db.collection('total').findOne({name:'total'});
+    // console.log(total)
+    //return res.send({userPosts, total})
+    return res.send(userPosts)
 }
 
 
@@ -38,7 +39,7 @@ export  async function postCashflow(req,res){
         // }
 
         //adiciona entrada/saida no banco de dados
-       // await db.collection("total").updateOne({name:'total'},{$push:{total:total+newValue}});
+       // await db.collection("total").updateOne({name:'total'},{$set:{total:total+value}});
         await db.collection("posts").insertOne(
             {
                 ...post,
