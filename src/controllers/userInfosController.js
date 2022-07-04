@@ -34,9 +34,9 @@ export  async function postCashflow(req,res){
 
         const session=await db.collection('sessions').findOne( {token} )
 
-        // if(!session){
-        //     return res.status(401).send('token invalido. Voce não tem autorização para ver os dados do usuario')
-        // }
+        if(!session){
+            return res.status(401).send('token invalido. Voce não tem autorização para ver os dados do usuario')
+        }
 
         //adiciona entrada/saida no banco de dados
        // await db.collection("total").updateOne({name:'total'},{$set:{total:total+value}});
