@@ -9,6 +9,7 @@ const router=express.Router();
 
 export  async function userLogin(req,res){
     const { email, password } = req.body;
+    const theUser=req.body
 
     try{
         const result=await authSchema2.validateAsync(req.body);
@@ -31,9 +32,14 @@ export  async function userLogin(req,res){
         
         const token=uuid()
         console.log(token)
+        await db.collection('sessions').insertOne({
+            token,
+            userId:findUser._id,
+        })
+        const { user } = findUser
 
         //enviando token ao usuario
-        return res.status(201).send({ token }) 
+        return res.status(201).send({ token, ...findUser }) 
     }
 
     catch(err){
