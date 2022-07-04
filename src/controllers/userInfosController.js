@@ -23,8 +23,8 @@ export  async function postCashflow(req,res){
     const { value, description }= post
     const { authorization }=req.headers
     const token=authorization?.replace('Bearer ','')
-    let now=dayjs().locale('pt-br').format("HH:MM:SS");
-    const newValue=parseFloat(value.replace(',', '.')).toFixed(2)
+    let now=dayjs().locale('pt-br').format("DD/MM");
+    //const newValue=parseFloat(value.replace(',', '.')).toFixed(2)
 
 
     try{
